@@ -1,30 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import './tailwind.output.css';
+import TimerDisplay from './components/timerDisplay'
 
 function App() {
-  const [secondsLeft, updateSecondsLeft] = useState(1500)
-  const [started, updateStarted] = useState(false)
+  const initialSeconds = 1500
+  const [secondsLeft, setSecondsLeft] = useState(initialSeconds)
+  const [isStarted, setIsStarted] = useState(false)
 
-  const [minutesLeftDisplay, updateMinutesLeftDisplay] = useState(25)
-  const [secondsLeftDisplay, updateSecondsLeftDisplay] = useState('00')
+  const toggle = () => {
+    setIsStarted(!isStarted)
+  }
+
+  const reset = () => {
+    setSecondsLeft(initialSeconds)
+    setIsStarted(false)
+  }
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      updateSecondsLeft(secondsLeft => secondsLeft - 1)
-    }, 1000)
+    let interval = null
+    if (isStarted) {
+      interval = setInterval(() => {
+        let newSecondsLeft = secondsLeft - 1
+        setSecondsLeft(newSecondsLeft)
+      }, 1000)
+    } else if (!isStarted && secondsLeft !== 0) {
+      clearInterval(interval)
+    }
     return () => clearInterval(interval)
-  }, [started])
+  }, [isStarted, secondsLeft])
 
 
   return (
     <div className="bg-gray-700">
       <div className="flex h-screen">
         <div className="m-auto">
-          <div id="time-left" className="text-6xl text-white">
-            {secondsLeft}
-            {/* {minutesLeftDisplay}:{secondsLeftDisplay} */}
-          </div>
-          <button onClick={() => updateStarted(true)}>Start</button>
+          <TimerDisplay secondsLeft={secondsLeft}/>
+          <button onClick={toggle}>{isStarted ? 'Stop' : 'Start'}</button>
+          <button onClick={reset}>Reset</button>
         </div>
       </div>
     </div>
