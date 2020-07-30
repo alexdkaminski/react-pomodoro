@@ -99,7 +99,7 @@ function App() {
       clearInterval(interval)
     }
     return () => clearInterval(interval)
-  }, [isStarted, secondsLeft])
+  }, [isStarted, secondsLeft, breakLength, sessionLength, timerStatus])
 
 
   return (
