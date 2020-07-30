@@ -104,28 +104,31 @@ function App() {
 
   return (
     <>
-      <div className="bg-gray-700">
+      <div className="bg-gray-200">
         <div className="flex h-screen">
-          <div className="m-auto w-84">
+          <div className="m-auto">
+            <div className="w-96 bg-blue-600 px-6 py-6 shadow-lg rounded-lg border-white border-solid border-8">
             <div id="timer-label" className="text-center text-2xl text-white">{timerStatus}</div>
             <TimerDisplay secondsLeft={secondsLeft}/>
             <div className="flex p-2 mb-8">
               <button id="start_stop" onClick={toggle} className="p-2 bg-white mx-2 w-1/2">{isStarted ? 'Stop' : 'Start'}</button>
               <button id="reset" onClick={reset} className="p-2 bg-white mx-2 w-1/2">Reset</button>
             </div>
-            <div className="flex text-gray-400">
+            <div className="flex text-gray-200">
               <div className="text-center mx-4 w-1/2">
                 <div id="session-increment" onClick={sessionIncrement}>▲</div>
-                <div id="session-length" className="text-4xl">{sessionLength}</div>
-                <div id="session-label">Session</div>
+                <div id="session-length" className="text-4xl -my-2">{sessionLength}</div>
                 <div id="session-decrement" onClick={sessionDecrement}>▼</div>
+                <div id="session-label">Session</div>
+
               </div>
               <div className="text-center mx-4 w-1/2">
                 <div id="break-increment" onClick={breakIncrement}>▲</div>
-                <div id="break-length" className="text-4xl text-gray-400">{breakLength}</div>
-                <div id="break-label" className="text-gray-400">Break</div>
+                <div id="break-length" className="text-4xl -my-2">{breakLength}</div>
                 <div id="break-decrement" onClick={breakDecrement}>▼</div>
+                <div id="break-label">Break</div>
               </div>
+            </div>
             </div>
           </div>
         </div>
